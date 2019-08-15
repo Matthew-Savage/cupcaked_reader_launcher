@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="cupcaked_reader_launcher:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/cupcaked_reader_launcher_jar</output-path>
+    <root id="archive" name="cupcaked_reader_launcher.jar">
+      <element id="module-output" name="cupcaked_reader_launcher" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Java Jars/jsch-0.1.54.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Java Jars/jsoup-1.11.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Java Jars/sqlite-jdbc-3.21.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
