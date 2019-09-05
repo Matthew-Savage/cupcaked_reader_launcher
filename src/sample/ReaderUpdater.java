@@ -9,13 +9,8 @@ import java.nio.file.StandardCopyOption;
 
 public class ReaderUpdater {
 
-    public static void downloadNewVersion(String file) {
-        try {
-            InputStream readerFile = new URL("https://" + Val.REMOTE_URL.get() + "/reader/" + file).openStream();
-            Files.copy(readerFile, Paths.get(Val.DIR_ROOT.get() + File.separator + file), StandardCopyOption.REPLACE_EXISTING);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Logging.logError(e.toString());
-        }
+    public static void downloadNewVersion(String file) throws Exception {
+        InputStream readerFile = new URL("https://" + Val.REMOTE_URL.get() + "/reader/" + file).openStream();
+        Files.copy(readerFile, Paths.get(Val.DIR_ROOT.get() + File.separator + file), StandardCopyOption.REPLACE_EXISTING);
     }
 }

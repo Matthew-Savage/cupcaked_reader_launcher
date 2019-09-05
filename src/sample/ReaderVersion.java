@@ -13,7 +13,16 @@ import java.util.Scanner;
 
 public class ReaderVersion {
 
-    public static boolean checkForUpdate() {
+    public static void checkForUpdate() throws Exception{
+        if (compareLocalToRemote()) {
+            Controller.paneTop.setValue("top_update_2");
+            Controller.paneMid.setValue("mid_update_1");
+            ReaderUpdater.downloadNewVersion("main.jar");
+            ReaderUpdater.downloadNewVersion("changelog.txt");
+        }
+    }
+
+    private static boolean compareLocalToRemote() {
         int localVersion = fetchLocalVersion();
         int remoteVersion;
         if (remoteLibraryAvailable()) {

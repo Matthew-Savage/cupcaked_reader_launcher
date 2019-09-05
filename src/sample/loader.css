@@ -1,0 +1,7 @@
+.root, .top, .mid, .bot {
+    -fx-background-color: transparent;
+}
+
+#background {
+    -fx-background-image: url("../assets/loader_bg.png");
+}
