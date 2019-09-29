@@ -1,18 +1,17 @@
 package sample;
 
-import javax.swing.plaf.nimbus.State;
 import java.io.File;
 import java.sql.*;
 
 public class Database {
 
-    private static Connection connection;
+    public static Connection connection;
 
     public static int readVersion() {
         try {
             openConnection(Val.DB_NAME_SETTINGS.get());
             Statement statement = connection.createStatement();
-            return parseResultSet(statement.executeQuery("SELECT " + Val.COLUMN.get() + " FROM " + Val.TABLE.get()));
+            return parseResultSet(statement.executeQuery("SELECT " + Val.COLUMN.get() + " FROM " + Val.VER.get()));
         } catch (Exception e) {
             e.printStackTrace();
             Logging.logError(e.toString());
@@ -26,8 +25,8 @@ public class Database {
         try {
             openConnection(Val.DB_NAME_SETTINGS.get());
             Statement statement = connection.createStatement();
-            statement.execute("DELETE FROM " + Val.TABLE.get());
-            statement.execute("INSERT INTO " + Val.TABLE.get() + " VALUES ('" + version + "')");
+            statement.execute("DELETE FROM " + Val.VER.get());
+            statement.execute("INSERT INTO " + Val.VER.get() + " VALUES ('" + version + "')");
         } catch (Exception e) {
 
         } finally {

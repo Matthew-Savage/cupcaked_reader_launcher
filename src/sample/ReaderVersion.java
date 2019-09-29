@@ -1,10 +1,12 @@
 package sample;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -13,18 +15,21 @@ import java.util.Scanner;
 
 public class ReaderVersion {
 
+    private static int remoteVersion;
+
     public static void checkForUpdate() throws Exception{
         if (compareLocalToRemote()) {
             Controller.paneTop.setValue("top_update_2");
             Controller.paneMid.setValue("mid_update_1");
             ReaderUpdater.downloadNewVersion("main.jar");
-            ReaderUpdater.downloadNewVersion("changelog.txt");
+            updateLocalVersion();
+            Desktop.getDesktop().browse(new URI("https://matthew-savage.net/reader/changelog.html"));
         }
+        // add an else here to change pane img if necessary
     }
 
     private static boolean compareLocalToRemote() {
         int localVersion = fetchLocalVersion();
-        int remoteVersion;
         if (remoteLibraryAvailable()) {
             remoteVersion = fetchRemoteVersion();
         } else {
@@ -44,6 +49,10 @@ public class ReaderVersion {
 
     private static int fetchLocalVersion() {
         return Database.readVersion();
+    }
+
+    private static void updateLocalVersion() {
+        Database.writeVersion(remoteVersion);
     }
 
     private static int fetchRemoteVersion() {

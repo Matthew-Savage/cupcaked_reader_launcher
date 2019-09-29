@@ -5,3 +5,7 @@
 #background {
     -fx-background-image: url("../assets/loader_bg.png");
 }
+
+#changeLog {
+    -fx-background-image: url("../assets/changelog.png");
+}

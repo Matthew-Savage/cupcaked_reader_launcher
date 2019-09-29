@@ -56,10 +56,6 @@ public class RemoteCatalog {
                 i++;
             }
         }
-
-        for (Manga manga : fiveNewestTitles) {
-            System.out.println(manga.getTitleId() + " - " + manga.getTitle());
-        }
     }
 
     private static void processRemoteEntries() {
@@ -140,10 +136,8 @@ public class RemoteCatalog {
 
     }
 
-    private static void updateProgress(int IndexNumber) {
-        // as fucked up as it is, i think the best way forward with this will be to make
-        // 100 images lol... at least it wont be the hardest thing ever..? maybe?
-        ControllerLoader.updateBottom.set((IndexNumber * 100) / results.size() + " %");
+    private static void updateProgress(int indexNumber) {
+        Controller.paneMid.setValue("progress/" + (indexNumber * 100) / results.size());
     }
 
     private static void tryNextPage() {

@@ -37,10 +37,11 @@ public class Controller {
                 setMidImage(newValue);
             }
         });
-        executor.execute(this::prelaunch);
+        executor.execute(this::updateApp);
     }
 
-    private void prelaunch() {
+    private void updateApp() {
+        Arrays.initializeArrays();
         setTopImage("top_update_1");
         try {
             ReaderVersion.checkForUpdate();
@@ -49,9 +50,21 @@ public class Controller {
             e.printStackTrace();
             Logging.logError(e.toString());
         } finally {
-            //run update method with its own tcf block that then runs launcher? kek? i dont know.
+//            updateCatalog();
         }
-        Launcher.launchReader();
+    }
+
+    private void updateCatalog() {
+        try {
+            RemoteCatalog.indexTitles();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Logging.logError(e.toString());
+        } finally {
+            Controller.paneMid.setValue("blank");
+            Controller.paneTop.setValue("launch");
+            Launcher.launchReader();
+        }
     }
 
     private void setTopImage(String imageName) {
